@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "drizzle:generate": "drizzle-kit generate",
-    "drizzle:push": "drizzle-kit push",
-    "drizzle:studio": "drizzle-kit studio"
+    "drizzle:migrate": "drizzle-kit migrate",
+    "drizzle:pull": "drizzle-kit pull",
+    "drizzle:push": "drizzle-kit push"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.80.0",
