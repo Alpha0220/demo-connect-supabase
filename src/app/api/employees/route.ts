@@ -11,6 +11,14 @@ const employeeSchema = z.object({
 	country: z.string().optional(),
 });
 
+const updateSchema = employeeSchema.extend({
+	id: z.string().uuid(),
+});
+
+const deleteSchema = z.object({
+	id: z.string().uuid(),
+});
+
 export async function GET() {
 	const { data, error } = await supabase
 		.from("employees")
@@ -40,6 +48,47 @@ export async function POST(request: Request) {
 		country: payload.country ?? null,
 	});
 
+	if (error) {
+		return NextResponse.json({ error: error.message }, { status: 500 });
+	}
+	return NextResponse.json({ ok: true });
+}
+
+export async function PATCH(request: Request) {
+	const json = await request.json();
+	const parsed = updateSchema.safeParse(json);
+	if (!parsed.success) {
+		return NextResponse.json({ error: parsed.error.message }, { status: 400 });
+	}
+	const { id, ...rest } = parsed.data;
+
+	const { error } = await supabase
+		.from("employees")
+		.update({
+			employee_id: rest.employeeId,
+			name: rest.name,
+			age: rest.age ?? null,
+			sex: rest.sex ?? null,
+			birthday: rest.birthday ?? null,
+			country: rest.country ?? null,
+		})
+		.eq("id", id);
+
+	if (error) {
+		return NextResponse.json({ error: error.message }, { status: 500 });
+	}
+	return NextResponse.json({ ok: true });
+}
+
+export async function DELETE(request: Request) {
+	const json = await request.json();
+	const parsed = deleteSchema.safeParse(json);
+	if (!parsed.success) {
+		return NextResponse.json({ error: parsed.error.message }, { status: 400 });
+	}
+
+	const { id } = parsed.data;
+	const { error } = await supabase.from("employees").delete().eq("id", id);
 	if (error) {
 		return NextResponse.json({ error: error.message }, { status: 500 });
 	}

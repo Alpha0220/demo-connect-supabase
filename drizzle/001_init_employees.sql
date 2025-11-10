@@ -24,4 +24,17 @@ for insert
 to anon
 with check (true);
 
+create policy if not exists "Public can update employees"
+on public.employees
+for update
+to anon
+using (true)
+with check (true);
+
+create policy if not exists "Public can delete employees"
+on public.employees
+for delete
+to anon
+using (true);
+
 
