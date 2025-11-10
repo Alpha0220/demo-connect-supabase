@@ -27,7 +27,7 @@ export default function HomePage() {
 						</p>
 					</div>
 				</div>
-				<div className="flex flex-wrap items-center justify-center gap-3">
+				<div className="flex flex-wrap items-center justify-center gap-3 text-white">
 					<Link
 						href="/employees"
 						className="rounded-full bg-sky-500 px-6 py-2 text-white shadow-sm transition hover:bg-sky-600"
@@ -36,13 +36,13 @@ export default function HomePage() {
 					</Link>
 					<Link
 						href="/employees/new"
-						className="rounded-full border border-sky-200 bg-white px-6 py-2 text-sky-600 transition hover:border-sky-300 hover:text-sky-700"
+						className="rounded-full border border-slate-200 bg-slate-500 px-6 py-2 text-white transition hover:border-slate-300 hover:text-slate-700"
 					>
 						เพิ่มพนักงานใหม่
 					</Link>
 					<Link
 						href="/employees?demo=test-query"
-						className="rounded-full bg-slate-900 px-6 py-2 text-white transition hover:bg-slate-800"
+						className="rounded-full bg-slate-900 px-6 py-2 text-gray-50 transition hover:bg-slate-800"
 					>
 						ทดลอง Query แบบเร็ว
 					</Link>
